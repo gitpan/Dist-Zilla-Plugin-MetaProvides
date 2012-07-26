@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Role::MetaProvider::Provider::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Role::MetaProvider::Provider::VERSION = '1.14000000';
+  $Dist::Zilla::Role::MetaProvider::Provider::VERSION = '1.14000001';
 }
 
 # ABSTRACT: A Role for Metadata providers specific to the 'provider' key.
@@ -14,7 +14,8 @@ BEGIN {
 # $Id:$
 use Moose::Role;
 use MooseX::Types::Moose (':all');
-use Dist::Zilla::Util::EmulatePhase 0.01000101 qw( get_metadata );
+use Readonly;
+Readonly my $MIN_EMULATE_PHASE_VERSION => 0.01000101;
 use namespace::autoclean;
 
 
@@ -65,7 +66,12 @@ sub _resolve_version {
 
 sub _try_regen_metadata {
   my ($self) = @_;
-  return get_metadata(
+
+  require Dist::Zilla::Util::EmulatePhase;
+  if ( defined $Dist::Zilla::Util::EmulatePhase::VERSION ) {
+    Dist::Zilla::Util::EmulatePhase->VERSION($MIN_EMULATE_PHASE_VERSION);
+  }
+  return Dist::Zilla::Util::EmulatePhase::get_metadata(
     {
       zilla => $self->zilla,
       isa   => [qw( =MetaNoIndex )]
@@ -142,7 +148,7 @@ Dist::Zilla::Role::MetaProvider::Provider - A Role for Metadata providers specif
 
 =head1 VERSION
 
-version 1.14000000
+version 1.14000001
 
 =head1 PERFORMS ROLES
 

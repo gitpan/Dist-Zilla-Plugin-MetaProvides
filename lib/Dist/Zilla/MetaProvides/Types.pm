@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::MetaProvides::Types::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::MetaProvides::Types::VERSION = '1.14000000';
+  $Dist::Zilla::MetaProvides::Types::VERSION = '1.14000001';
 }
 
 # ABSTRACT: Utility Types for the MetaProvides Plugin
@@ -35,7 +35,7 @@ Dist::Zilla::MetaProvides::Types - Utility Types for the MetaProvides Plugin
 
 =head1 VERSION
 
-version 1.14000000
+version 1.14000001
 
 =head1 SUBTYPES
 
